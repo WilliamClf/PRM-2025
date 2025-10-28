@@ -1,9 +1,18 @@
-import { CategoryLayout } from "./cases/categories/components/category-layout"
+import { Routes,Route } from "react-router-dom"
+import { CategoryLayout } from "./categories/components/category-layout"
+import { CategoryForm } from "./components/layout/category.form"
 
 function App() {
   return (
     <div className="wrapper">
-      <CategoryLayout />
+      <main>  
+        <Routes>
+          <Route path="/categories" element={<CategoryLayout />}>
+            <Route path="new" element={<CategoryForm />} />
+            <Route path=":id" element={<CategoryForm />} />
+          </Route>
+        </Routes>
+      </main>
     </div>
   )
 }
