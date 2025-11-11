@@ -3,15 +3,17 @@ import { categoryColumns } from "./category-columns";
 import { useCategories } from "../../hooks/use-category";
 
 export function CategoryDataTable() {
-    const { data: categories, isLoading } = useCategories();
+
+    const {data: categories, isLoading} = useCategories();
 
     return (
         <div>
-            {isLoading ? (
+            { isLoading ? (
                 <p>Carregando...</p>
             ) : (
                 <DataTable columns={categoryColumns} data={categories!} />
             )}
         </div>
-    );
+
+    )
 }
