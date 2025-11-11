@@ -1,5 +1,5 @@
 import { type ColumnDef } from "@tanstack/react-table"
-import type { ProductDTO } from "../../dtos/produtct.dto"   
+import type { ProductDTO } from "../../dtos/produtct.dto"
 import { cn } from "@/lib/utils"
 import { DataTableAction } from "@/components/layout/data-table-actions"
 import { FormattedNumber, IntlProvider } from "react-intl";
@@ -92,4 +92,4 @@ export const productColumns: ColumnDef<ProductDTO>[] = [
       )
     },
   }
-]
+];

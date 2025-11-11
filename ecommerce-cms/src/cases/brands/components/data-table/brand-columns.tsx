@@ -17,11 +17,11 @@ export const brandColumns: ColumnDef<BrandDTO>[] = [
         cell: ({ row }) => {
             const brand = row.original;
 
-            return(
+            return (
                 <div className="flex justify-end mr-4">
                     <DataTableAction itemId={brand.id!} />
                 </div>
-            )
+            );
         }
     }
 ];

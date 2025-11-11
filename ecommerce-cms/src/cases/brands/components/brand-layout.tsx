@@ -1,4 +1,3 @@
-
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { BrandDataTable } from "./data-table/brand-data-table"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
@@ -7,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Outlet, useNavigate } from "react-router-dom"
 
 export function BrandLayout() {
-
     const navigate = useNavigate();
     
     function handleCreate() {
@@ -28,9 +26,7 @@ export function BrandLayout() {
                             <Search />
                         </InputGroupAddon>
                     </InputGroup>
-                    <Button
-                        onClick={handleCreate}
-                    >
+                    <Button onClick={handleCreate}>
                         <Plus />
                         Adicionar
                     </Button>
@@ -43,5 +39,5 @@ export function BrandLayout() {
 
             </div>
         </div>
-    )
+    );
 }

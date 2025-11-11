@@ -3,7 +3,6 @@ import { brandColumns } from "./brand-columns";
 import { useBrands } from "../../hooks/use-brand";
 
 export function BrandDataTable() {
-
     const {data: brands, isLoading} = useBrands();
 
     return (
@@ -14,6 +13,5 @@ export function BrandDataTable() {
                 <DataTable columns={brandColumns} data={brands!} />
             )}
         </div>
-
-    )
+    );
 }

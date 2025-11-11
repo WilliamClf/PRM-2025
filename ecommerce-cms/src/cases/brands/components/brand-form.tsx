@@ -1,7 +1,6 @@
 import { SidebarForm } from "@/components/layout/sidebar-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBrand, useCreateBrand, useDeleteBrand, useUpdateBrand } from "../hooks/use-brand";
-
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from "react-hook-form";
@@ -10,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-    name: z.string().min(2, 'Informe pelo menos 2 caractéres').max(60, 'Máximo 60 caractéres'),
+    name: z.string().min(2, 'Informe pelo menos 2 caracteres').max(60, 'Máximo de 60 caracteres'),
 })
 
 export function BrandForm() {
@@ -25,7 +24,7 @@ export function BrandForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: ''
+            name: '',
         }
     });
 
@@ -33,26 +32,31 @@ export function BrandForm() {
         if (data) {
             form.reset({
                 name: data.name
-            })
+            });
         }
-    }, [data, form])
+    }, [data, form]);
 
     function onSubmit(value: z.infer<typeof formSchema>) {
         if (id) {
             updateBrand.mutate(
-                {id, brand: {name: value.name}},
+                {
+                    id, 
+                    brand: {
+                        name: value.name
+                    }
+                },
                 {
                     onSettled: () => {
-                        navigate('/brands')
+                        navigate('/brands');
                     }
                 }
             );
-        } else  {
+        } else {
             createBrand.mutate(
                 {name: value.name},
                 {
                     onSettled: () => {
-                        navigate('/brands')
+                        navigate('/brands');
                     }
                 }
             );
@@ -63,19 +67,17 @@ export function BrandForm() {
         if (id) {
             deleteBrand.mutate(id, {
                 onSettled: () => {
-                    navigate('/brands')
+                    navigate('/brands');
                 }
             })
         }
     }
 
     return (
-        <SidebarForm
-            title={id ? 'Editar Marca' : 'Adicionar Marca'}
-            onSave={form.handleSubmit(onSubmit)}
-            {...(id && { onDelete: onDelete })}            
-            loading={isLoading}
-        >
+        <SidebarForm title={id ? 'Editar Marca' : 'Adicionar Marca'}
+                     onSave={form.handleSubmit(onSubmit)}
+                     {...(id && { onDelete: onDelete })}            
+                     loading={isLoading}>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
@@ -94,5 +96,5 @@ export function BrandForm() {
                 </form>
             </Form>
         </SidebarForm>
-    )
+    );
 }

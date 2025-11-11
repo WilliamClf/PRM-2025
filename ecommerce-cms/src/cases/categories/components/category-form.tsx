@@ -1,22 +1,21 @@
 import { SidebarForm } from "@/components/layout/sidebar-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCategory, useCreateCategory, useDeleteCategory, useUpdateCategory } from "../hooks/use-category";
-
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-    name: z.string().min(2, 'Informe pelo menos 2 caractéres').max(60, 'Máximo 60 caractéres'),
+  name: z.string().min(2, 'Informe pelo menos 2 caracteres').max(60, 'Máximo de 60 caracteres')
 })
 
 export function CategoryForm() {
     const navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
-    const { data, isLoading } = useCategory(id ?? '');
+    const {id} = useParams<{id: string}>();
+    const {data, isLoading} = useCategory(id ?? '');
 
     const createCategory = useCreateCategory();
     const updateCategory = useUpdateCategory();
@@ -25,7 +24,7 @@ export function CategoryForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: ''
+            name: '',
         }
     });
 
@@ -33,26 +32,32 @@ export function CategoryForm() {
         if (data) {
             form.reset({
                 name: data.name
-            })
+            });
         }
-    }, [data, form])
+    }, [data, form]);
 
     function onSubmit(value: z.infer<typeof formSchema>) {
         if (id) {
             updateCategory.mutate(
-                {id, category: {name: value.name}},
+                {
+                    id: id,
+                    category: {
+                        name: value.name
+                    }
+                },
                 {
                     onSettled: () => {
-                        navigate('/categories')
+                        navigate('/categories');
                     }
                 }
             );
-        } else  {
+        } else {
             createCategory.mutate(
                 {name: value.name},
                 {
                     onSettled: () => {
-                        navigate('/categories')
+                        navigate('/categories');
+
                     }
                 }
             );
@@ -63,19 +68,17 @@ export function CategoryForm() {
         if (id) {
             deleteCategory.mutate(id, {
                 onSettled: () => {
-                    navigate('/categories')
+                    navigate('/categories');
                 }
-            })
+            });
         }
     }
 
     return (
-        <SidebarForm
-            title={id ? 'Editar Categoria' : 'Adicionar Categoria'}
-            onSave={form.handleSubmit(onSubmit)}
-            {...(id && { onDelete: onDelete })}            
-            loading={isLoading}
-        >
+        <SidebarForm title={id ? 'Editar Categoria' : 'Adicionar Categoria'}
+                     onSave={form.handleSubmit(onSubmit)}
+                     {...(id && {onDelete: onDelete})}
+                     loading={isLoading}>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
@@ -94,5 +97,5 @@ export function CategoryForm() {
                 </form>
             </Form>
         </SidebarForm>
-    )
+    );
 }

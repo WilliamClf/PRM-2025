@@ -3,7 +3,6 @@ import type { ProductDTO } from "../dtos/produtct.dto";
 import { toast } from "react-toastify";
 import { ProductService } from "../services/product.service";
 
-
 export function useProducts() {
     return useQuery<ProductDTO[]>({
         queryKey: ['products'],
@@ -15,51 +14,51 @@ export function useProduct(id: string) {
     return useQuery<ProductDTO>({
         queryKey: ['product', id],
         queryFn: () => ProductService.getById(id),
-        enabled: !!id //-> or Boolean(id)
+        enabled: !!id
     });
 }
 
-export function useCreateProduct(){
+export function useCreateProduct() {
     const queryClient = useQueryClient();
 
     return useMutation<ProductDTO, Error, Omit<ProductDTO, 'id'>>({
         mutationFn: (product: Omit<ProductDTO, 'id'>) => ProductService.create(product),
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['products']});
-            toast.success('Registro adicionado com sucessso!')
+            queryClient.invalidateQueries({ queryKey: ['products'] });
+            toast.success('Registro adicionado com sucesso!');
         }, 
         onError: (error) => {
-            toast.error(`Erro ao adicionar: ${error.message}`)
+            toast.error(`Erro ao adicionar: ${error.message}`);
         }
     });
 }
 
-export function useUpdateProduct(){
+export function useUpdateProduct() {
     const queryClient = useQueryClient();
 
     return useMutation<ProductDTO, Error, {id: string, product: ProductDTO}>({
         mutationFn: ({id, product}) => ProductService.update(id, product),
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['products']});
-            toast.success('Registro alterado com sucessso!')
+            queryClient.invalidateQueries({ queryKey: ['products'] });
+            toast.success('Registro alterado com sucesso!');
         }, 
         onError: (error) => {
-            toast.error(`Erro ao alterar: ${error.message}`)
+            toast.error(`Erro ao alterar: ${error.message}`);
         }
     });
 }
 
-export function useDeleteProduct(){
+export function useDeleteProduct() {
     const queryClient = useQueryClient();
 
     return useMutation<void, Error, string>({
         mutationFn: (id: string) => ProductService.delete(id),
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['products']});
-            toast.success('Registro exluído com sucessso!')
+            queryClient.invalidateQueries({ queryKey: ['products'] });
+            toast.success('Registro excluído com sucessso!');
         }, 
         onError: (error) => {
-            toast.error(`Erro ao excluir: ${error.message}`)
+            toast.error(`Erro ao excluir: ${error.message}`);
         }
     });
 }

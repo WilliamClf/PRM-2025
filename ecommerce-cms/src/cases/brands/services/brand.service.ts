@@ -10,13 +10,13 @@ export const BrandService = {
         return result.data;
     },
 
-    async create(brand: BrandDTO): Promise<BrandDTO> {
-        const result = await api.post(_ENDPOINT, brand);
+    async getById(id: string): Promise<BrandDTO> {
+        const result = await api.get(`${_ENDPOINT}/${id}`);
         return result.data;
     },
 
-    async getById(id: string): Promise<BrandDTO> {
-        const result = await api.get(`${_ENDPOINT}/${id}`);
+    async create(brand: BrandDTO): Promise<BrandDTO> {
+        const result = await api.post(_ENDPOINT, brand);
         return result.data;
     },
 
@@ -25,8 +25,7 @@ export const BrandService = {
         return result.data;
     },
 
-    async delete(id: string): Promise<void>{
+    async delete(id: string): Promise<void> {
         await api.delete(`${_ENDPOINT}/${id}`);
     }
-
 };

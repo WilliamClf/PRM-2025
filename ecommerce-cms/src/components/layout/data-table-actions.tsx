@@ -6,9 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 type DataTableActionProps = {
     itemId: string | number;
 }
-export function DataTableAction({
-    itemId
-}: DataTableActionProps) {
+export function DataTableAction({ itemId }: DataTableActionProps) {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -20,18 +18,16 @@ export function DataTableAction({
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <Button
-                    variant='outline'
-                    size='icon'
-                    onClick={handleNavigateToId}
-                >
+                <Button variant='outline'
+                        size='icon'
+                        onClick={handleNavigateToId}>
                     <EditIcon />
                 </Button>
             </TooltipTrigger>
+
             <TooltipContent>
                 <p>Editar/remover registro</p>
             </TooltipContent>
         </Tooltip>
-    )
-
+    );
 }
