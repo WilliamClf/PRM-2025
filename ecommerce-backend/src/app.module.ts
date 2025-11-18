@@ -5,7 +5,8 @@ import { BrandModule } from './cases/brands/brand.module';
 import { ProductModule } from './cases/products/product.module';
 import { ConfigModule } from '@nestjs/config';
 import { CityModule } from './cases/cities/city.module';
-import { CostumerModule } from './cases/costumers/costumer.module';
+import { CustomerModule } from './cases/customers/customer.module';
+import { OrderModule } from './cases/orders/order.module';
 
 @Module ({
   imports: [
@@ -28,7 +29,8 @@ import { CostumerModule } from './cases/costumers/costumer.module';
     BrandModule,
     ProductModule,
     CityModule,
-    CostumerModule,
+    CustomerModule,
+    OrderModule
   ],
 })
 

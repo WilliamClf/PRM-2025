@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { ProductDTO } from "../dtos/produtct.dto";
+import type { ProductDTO } from "../dtos/product.dto";
 import { toast } from "react-toastify";
 import { ProductService } from "../services/product.service";
 

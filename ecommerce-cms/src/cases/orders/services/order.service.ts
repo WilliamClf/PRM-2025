@@ -13,5 +13,10 @@ export const OrderService = {
     async getById(id: string): Promise<OrderDTO> {
         const result = await api.get(`${_ENDPOINT}/${id}`);
         return result.data;
+    },
+
+    async update(id: string, order: OrderDTO): Promise<OrderDTO> {
+            const result = await api.put(`${_ENDPOINT}/${id}`, order);
+            return result.data;
     }
 };

@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Costumer } from "src/cases/costumers/costumer.entity";
+import { Customer } from "src/cases/customers/customer.entity";
 import { OrderItem } from "./order-item.entity";
 
 enum OrderStatus {
@@ -16,8 +16,8 @@ export class Order {
     @PrimaryGeneratedColumn('uuid') 
     id: string;  
 
-    @ManyToOne(() => Costumer, {eager: true, nullable: false})
-    customer : Costumer;
+    @ManyToOne(() => Customer, {eager: true, nullable: false})
+    customer : Customer;
 
     @Column('decimal', {nullable: true, precision: 10, scale: 2})
     shipping: number;

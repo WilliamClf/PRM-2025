@@ -3,7 +3,7 @@ import { SidebarForm } from "@/components/layout/sidebar-form";
 import { useEffect, useState } from "react";
 import { useProduct, useCreateProduct, useDeleteProduct, useUpdateProduct } from "../hooks/use-product";
 import { Input } from "@/components/ui/input";
-import type { ProductDTO } from "../dtos/produtct.dto";
+import type { ProductDTO } from "../dtos/product.dto";
 import { Textarea } from "@/components/ui/textarea";
 import { z } from "zod"
 import { useForm } from "react-hook-form";
